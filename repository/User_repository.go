@@ -23,7 +23,7 @@ func (r *Repo) CheckUser(user_id primitive.ObjectID) (bool, error) {
 			// User not found
 			return false, nil
 		}
-		return false, err
+		return false, utils.ErrQuerying
 	}
 
 	return true, err

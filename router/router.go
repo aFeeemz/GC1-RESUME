@@ -17,8 +17,11 @@ func InitRoutes(e *echo.Echo, db *mongo.Database) {
 	// transaction controller init
 	tc := &controller.TransactionController{TR: repo}
 	uc := &controller.UserController{UR: repo}
+	fc := &controller.FieldController{FR: repo}
 
-	e.POST("/transaction", tc.CreateTransaction)
+	e.POST("/Transaction", tc.CreateTransaction)
 	e.POST("/Create-Users", uc.CreateUser)
+
+	e.GET("/All-Fields", fc.GetAllFields)
 
 }

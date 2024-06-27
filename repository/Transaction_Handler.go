@@ -2,6 +2,7 @@ package repository
 
 import (
 	"GC1/models"
+	"GC1/utils"
 	"context"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -20,6 +21,12 @@ func (r *Repo) CreateTransaction(t *models.Transaction) (interface{}, error) {
 	// Check if user exists
 	isUserExists, err := r.CheckUser(t.UserID)
 	if err != nil || !isUserExists {
+		return nil, utils.ErrUserNotFound
+	}
+
+	// Check if field exists
+	isFieldExists, err := r.CheckField(t.FieldID)
+	if err != nil || !isFieldExists {
 		return nil, err
 	}
 
